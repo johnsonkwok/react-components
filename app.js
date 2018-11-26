@@ -1,16 +1,14 @@
-const GroceryList = () => (
+const GroceryList = (props) => (
   <ul>
-    <Milk />
-    <Cereal />
+    <GroceryListItem groceryItem={props.groceryItems[0]} />
+    <GroceryListItem groceryItem={props.groceryItems[1]} />
   </ul>
 );
 
-const Milk = () => (
-  <li>Milk</li>
+const GroceryListItem = (props) => (
+  <li>{props.groceryItem}</li>
 );
 
-const Cereal = () => (
-  <li>Cereal</li>
-);
+const groceryItems = ['Milk', 'Cereal'];
 
-ReactDOM.render(<GroceryList />, document.getElementById('app'));
+ReactDOM.render(<GroceryList groceryItems={groceryItems}/>, document.getElementById('app'));
