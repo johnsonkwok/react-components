@@ -1,7 +1,7 @@
 const GroceryList = (props) => (
   <ul>
-    {props.groceryItems.map(groceryItem => 
-      <GroceryListItem groceryItem={groceryItem} />
+    {props.groceryItems.map((groceryItem, index) => 
+      <GroceryListItem key={index} groceryItem={groceryItem} />
     )}
   </ul>
 );
@@ -9,11 +9,32 @@ const GroceryList = (props) => (
 class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
+    this.onMouseOverItem = this.onMouseOverItem.bind(this);
+    this.onMouseOffItem = this.onMouseOffItem.bind(this);
+    this.state = {
+      bold: false
+    };
+  }
+
+  onMouseOverItem() {
+    this.setState({
+      bold: true
+    });
+  }
+
+  onMouseOffItem() {
+    this.setState({
+      bold: false
+    });
   }
 
   render() {
+    const style = {
+      fontWeight: this.state.bold ? 'bold' : 'normal'
+    };
+
     return (
-      <li>{this.props.groceryItem}</li>
+      <li style={style} onMouseOver={this.onMouseOverItem} onMouseOut={this.onMouseOffItem}>{this.props.groceryItem}</li>
     );
   }
 
